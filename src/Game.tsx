@@ -47,7 +47,7 @@ export const Game: React.FC<{}> = () => {
 
     setInitArray(temporaryInitArray);
     setGameArray(temporaryInitArray);
-    setSolvedArray(temporarySolvedArray);
+    setSolvedArray(temporarySolvedArray); //TODO: Set later
     setNumberSelected('0');
     setTimeGameStarted(moment());
     setCellSelected(-1);
@@ -58,6 +58,7 @@ export const Game: React.FC<{}> = () => {
   /**
    * Checks if the game is solved.
    */
+  //TODO: Update
   function _isSolved(index: number, value: string) {
     if (gameArray.every((cell: string, cellIndex: number) => {
           if (cellIndex === index)
@@ -98,6 +99,7 @@ export const Game: React.FC<{}> = () => {
    * A 'user fill' will be passed on to the
    * _fillCell function above.
    */
+  //TODO: Update
   function _userFillCell(index: number, value: string) {
     if (mistakesMode) {
       if (value === solvedArray[index]) {
@@ -179,6 +181,7 @@ export const Game: React.FC<{}> = () => {
    * On Click Hint,
    * fill the selected cell if its empty or wrong number is filled.
    */
+  // TODO: Update
   function onClickHint() {
     if (cellSelected !== -1) {
       _fillCell(cellSelected, solvedArray[cellSelected]);
