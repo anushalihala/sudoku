@@ -17,7 +17,9 @@ type SudokuContextProps = {
   initArray: string[],
   setInitArray: React.Dispatch<React.SetStateAction<string[]>>,
   won: boolean,
-  setWon: React.Dispatch<React.SetStateAction<boolean>>
+  setWon: React.Dispatch<React.SetStateAction<boolean>>,
+  obtainedSolution: boolean,
+  setObtainedSolution: React.Dispatch<React.SetStateAction<boolean>>
 };
 
 
@@ -28,7 +30,8 @@ const SudokuContext = createContext<SudokuContextProps>({ numberSelected: '0', s
                                                           fastMode: false, setFastMode: () => {},
                                                           cellSelected: -1, setCellSelected: () => {},
                                                           initArray: [], setInitArray: () => {},
-                                                          won: false, setWon: () => {} });
+                                                          won: false, setWon: () => {},
+                                                          obtainedSolution: false, setObtainedSolution: () => {} });
 
 type SudokuProviderProps = {
   children: React.ReactElement
@@ -43,6 +46,7 @@ export const SudokuProvider = ({ children }: SudokuProviderProps) => {
   let [ cellSelected, setCellSelected ] = useState<number>(-1);
   let [ initArray, setInitArray ] = useState<string[]>([]);
   let [ won, setWon ] = useState<boolean>(false);
+  let [ obtainedSolution, setObtainedSolution ] = useState<boolean>(false);
 
   return (
     <SudokuContext.Provider value={
@@ -54,7 +58,8 @@ export const SudokuProvider = ({ children }: SudokuProviderProps) => {
         fastMode, setFastMode,
         cellSelected, setCellSelected,
         initArray, setInitArray,
-        won, setWon
+        won, setWon,
+        obtainedSolution, setObtainedSolution
       }
     }>
       {children}
