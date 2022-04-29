@@ -4,6 +4,7 @@ import { Timer } from '../Timer';
 import { Numbers } from '../Numbers';
 import { Action } from '../Action';
 import { Mode } from '../Mode';
+import { SolveMethod } from '../SolveMethod';
 
 type StatusSectionProps = {
   onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void,
@@ -21,7 +22,7 @@ type StatusSectionProps = {
 export const StatusSection = (props: StatusSectionProps) => {
   return (
     <section className="status">
-      <Difficulty onChange={props.onChange} />
+      <SolveMethod onChange={props.onChange} />
       <Timer />
       <Numbers onClickNumber={(number) => props.onClickNumber(number)} />
       <div className="status__actions">
