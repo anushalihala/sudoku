@@ -1,4 +1,5 @@
 import React from 'react';
+import { Mode } from '../Mode'
 
 type HeaderProps = {
   onClick: () => void
@@ -16,6 +17,7 @@ export const Header = (props: HeaderProps) => {
       <h2 onClick={props.onClick}>
         New Game
       </h2>
+      <Mode mode='lock' onClickMode={() => {}}></Mode>
     </header>
   )
 }

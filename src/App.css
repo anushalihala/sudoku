@@ -263,6 +263,11 @@ body {
   position: relative;
 }
 
+.status__action-lock-mode {
+  text-align: center;
+  float: right
+}
+
 .status__action-undo,
 .status__action-erase,
 .status__action-hint {
@@ -278,11 +283,20 @@ body {
   width: 40%;
 }
 
+.status__action-lock-mode {
+  width: 15%;
+}
+
 .status__action-svg,
 .status__action-mistakes-mode-switch,
 .status__action-fast-mode-switch {
   position: absolute;
   left: 50%;
+  transform: translate(-50%, 0);
+}
+
+.status__action-lock-mode-switch {
+  position: absolute;
   transform: translate(-50%, 0);
 }
 
@@ -305,7 +319,8 @@ body {
 }
 
 .status__action-mistakes-mode-switch,
-.status__action-fast-mode-switch {
+.status__action-fast-mode-switch,
+.status__action-lock-mode-switch {
   top: 16px;
   display: inline-block;
   width: 46px;
@@ -321,7 +336,8 @@ body {
 
 /* Hide default HTML checkbox */
 .status__action-mistakes-mode-switch input,
-.status__action-fast-mode-switch input {
+.status__action-fast-mode-switch input,
+.status__action-lock-mode-switch input  {
   opacity: 0;
   width: 0;
   height: 0;
@@ -329,7 +345,8 @@ body {
 
 /* The slider */
 .status__action-mistakes-mode-slider,
-.status__action-fast-mode-slider {
+.status__action-fast-mode-slider,
+.status__action-lock-mode-slider {
   position: absolute;
   cursor: pointer;
   top: 0;
@@ -343,7 +360,8 @@ body {
 }
 
 .status__action-mistakes-mode-slider:before,
-.status__action-fast-mode-slider:before {
+.status__action-fast-mode-slider:before,
+.status__action-lock-mode-slider:before {
   position: absolute;
   content: "";
   height: 20px;
@@ -357,17 +375,20 @@ body {
 }
 
 input:checked + .status__action-mistakes-mode-slider,
-input:checked + .status__action-fast-mode-slider {
+input:checked + .status__action-fast-mode-slider,
+input:checked + .status__action-lock-mode-slider {
   background-color: var(--color-blue);
 }
 
 input:focus + .status__action-mistakes-mode-slider,
-input:focus + .status__action-fast-mode-slider {
+input:focus + .status__action-fast-mode-slider,
+input:focus + .status__action-lock-mode-slider {
   box-shadow: 0 0 1px var(--color-blue);
 }
 
 input:checked + .status__action-mistakes-mode-slider:before,
-input:checked + .status__action-fast-mode-slider:before {
+input:checked + .status__action-fast-mode-slider:before,
+input:checked + .status__action-lock-mode-slider:before {
   -webkit-transform: translateX(20px);
   -ms-transform: translateX(20px);
   transform: translateX(20px);
