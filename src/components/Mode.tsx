@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSudokuContext } from '../context/SudokuContext';
 
 type ModeProps = {
   mode: string,
@@ -10,8 +11,10 @@ type ModeProps = {
  * elements in the Status Section.
  */
 export const Mode = (props: ModeProps) => {
+  const sudokuContext = useSudokuContext();
+  let isDisabled = props.mode == "mistakes" && !sudokuContext.obtainedSolution
   return (
-    <div className={ props.mode === 'mistakes'
+    <div style={isDisabled ? {pointerEvents: "none", opacity: "0.4"} : {}} className={ props.mode === 'mistakes'
                       ? "status__action-mistakes-mode"
                       : "status__action-fast-mode"}>
       <label className={ props.mode === 'mistakes'
