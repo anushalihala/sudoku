@@ -33,7 +33,8 @@ export const Game: React.FC<{}> = () => {
         fastMode, setFastMode,
         cellSelected, setCellSelected,
         initArray, setInitArray,
-        setWon } = useSudokuContext();
+        setWon, 
+        obtainedSolution, setObtainedSolution } = useSudokuContext();
   let [ mistakesMode, setMistakesMode ] = useState<boolean>(false);
   let [ history, setHistory ] = useState<string[][]>([]);
   let [ solvedArray, setSolvedArray ] = useState<string[]>([]);
