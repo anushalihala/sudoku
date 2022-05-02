@@ -4,7 +4,6 @@ import { Header } from './components/layout/Header';
 import { GameSection } from './components/layout/GameSection';
 import { StatusSection } from './components/layout/StatusSection';
 import { Footer } from './components/layout/Footer';
-import { getUniqueSudoku } from './solver/UniqueSudoku'; //TODO: Remove
 import { getBlankSudoku } from './solver/BlankSudoku';
 import { useSudokuContext } from './context/SudokuContext';
 
@@ -50,7 +49,7 @@ export const Game: React.FC<{}> = () => {
     let temporaryInitArray = getBlankSudoku()
     
     setInitArray(temporaryInitArray);
-    setGameArray(temporaryInitArray); //TODO
+    setGameArray(temporaryInitArray); 
     // setSolvedArray(temporarySolvedArray); //TODO: Set later
     setNumberSelected('0');
     setTimeGameStarted(moment());
@@ -62,7 +61,6 @@ export const Game: React.FC<{}> = () => {
   /**
    * Checks if the game is solved.
    */
-  //TODO: Update
   function _isSolved(index: number, value: string) {
     if (gameArray.every((cell: string, cellIndex: number) => {
           if (cellIndex === index)
@@ -107,7 +105,7 @@ export const Game: React.FC<{}> = () => {
         setGameArray(tempGameArray)
       }
 
-      if (_isSolved(index, value)) {
+      if (obtainedSolution && _isSolved(index, value)) {
         setOverlay(true);
         setWon(true);
       }
@@ -118,9 +116,8 @@ export const Game: React.FC<{}> = () => {
    * A 'user fill' will be passed on to the
    * _fillCell function above.
    */
-  //TODO: Update
   function _userFillCell(index: number, value: string) {
-    if (mistakesMode) {
+    if (mistakesMode && obtainedSolution) {
       if (value === solvedArray[index]) {
         _fillCell(index, value);
       }
@@ -200,9 +197,8 @@ export const Game: React.FC<{}> = () => {
    * On Click Hint,
    * fill the selected cell if its empty or wrong number is filled.
    */
-  // TODO: Update
   function onClickHint() {
-    if (cellSelected !== -1) {
+    if (cellSelected !== -1 && obtainedSolution) {
       _fillCell(cellSelected, solvedArray[cellSelected]);
     }
   }
@@ -229,7 +225,6 @@ export const Game: React.FC<{}> = () => {
    * Toggle Game Lock
    */
    function onClickLockMode() {
-    // TODO
     setLockMode(!lockMode)
   }
 
