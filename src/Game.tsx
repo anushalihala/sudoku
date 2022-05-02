@@ -4,7 +4,8 @@ import { Header } from './components/layout/Header';
 import { GameSection } from './components/layout/GameSection';
 import { StatusSection } from './components/layout/StatusSection';
 import { Footer } from './components/layout/Footer';
-import { getUniqueSudoku } from './solver/UniqueSudoku';
+import { getUniqueSudoku } from './solver/UniqueSudoku'; //TODO: Remove
+import { getBlankSudoku } from './solver/BlankSudoku';
 import { useSudokuContext } from './context/SudokuContext';
 
 /**
@@ -34,7 +35,8 @@ export const Game: React.FC<{}> = () => {
         cellSelected, setCellSelected,
         initArray, setInitArray,
         setWon, 
-        obtainedSolution, setObtainedSolution } = useSudokuContext();
+        obtainedSolution, setObtainedSolution,
+        lockMode, setLockMode } = useSudokuContext();
   let [ mistakesMode, setMistakesMode ] = useState<boolean>(false);
   let [ history, setHistory ] = useState<string[][]>([]);
   let [ solvedArray, setSolvedArray ] = useState<string[]>([]);
@@ -44,11 +46,12 @@ export const Game: React.FC<{}> = () => {
    * Creates a new game and initializes the state variables.
    */
   function _createNewGame(e?: React.ChangeEvent<HTMLSelectElement>) {
-    let [ temporaryInitArray, temporarySolvedArray ] = getUniqueSudoku(difficulty, e);
-
+    // let [ temporaryInitArray, temporarySolvedArray ] = getUniqueSudoku(difficulty, e);
+    let temporaryInitArray = getBlankSudoku()
+    
     setInitArray(temporaryInitArray);
-    setGameArray(temporaryInitArray);
-    setSolvedArray(temporarySolvedArray); //TODO: Set later
+    setGameArray(temporaryInitArray); //TODO
+    // setSolvedArray(temporarySolvedArray); //TODO: Set later
     setNumberSelected('0');
     setTimeGameStarted(moment());
     setCellSelected(-1);
@@ -77,17 +80,32 @@ export const Game: React.FC<{}> = () => {
    * Used to Fill / Erase as required.
    */
   function _fillCell(index: number, value: string) {
+    console.log("lockMode",lockMode) // test logs
     if (initArray[index] === '0') {
       // Direct copy results in interesting set of problems, investigate more!
-      let tempArray = gameArray.slice();
-      let tempHistory = history.slice();
-
+    
+      if(!lockMode){
       // Can't use tempArray here, due to Side effect below!!
-      tempHistory.push(gameArray.slice());
-      setHistory(tempHistory);
+        console.log("Filling gameArray | Lock mode =", lockMode)
+        let tempArray = gameArray.slice();
+        let tempHistory = history.slice();
 
-      tempArray[index] = value;
-      setGameArray(tempArray);
+        tempHistory.push(gameArray.slice());
+        setHistory(tempHistory);
+
+        tempArray[index] = value;
+        setGameArray(tempArray);
+      }
+      else{
+        console.log("Filling initArray | Lock mode =", lockMode)
+        let tempInitArray = initArray.slice()
+        let tempGameArray = gameArray.slice()
+
+        tempInitArray[index] = value;
+        setInitArray(tempInitArray)
+        tempGameArray[index] = value;
+        setGameArray(tempGameArray)
+      }
 
       if (_isSolved(index, value)) {
         setOverlay(true);
@@ -208,6 +226,14 @@ export const Game: React.FC<{}> = () => {
   }
 
   /**
+   * Toggle Game Lock
+   */
+   function onClickLockMode() {
+    // TODO
+    setLockMode(!lockMode)
+  }
+
+  /**
    * Close the overlay on Click.
    */
   function onClickOverlay() {
@@ -226,7 +252,7 @@ export const Game: React.FC<{}> = () => {
   return (
     <>
       <div className={overlay?"container blur":"container"}>
-        <Header onClick={onClickNewGame}/>
+        <Header onClick={onClickNewGame} onClickLockMode={onClickLockMode}/>
         <div className="innercontainer">
           <GameSection
             onClick={(indexOfArray: number) => onClickCell(indexOfArray)}
