@@ -7,13 +7,13 @@ import { Mode } from '../Mode';
 import { SolveMethod } from '../SolveMethod';
 
 type StatusSectionProps = {
-  onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void,
   onClickNumber: (number: string) => void,
   onClickUndo: () => void,
   onClickErase: () => void,
   onClickHint: () => void,
   onClickMistakesMode: () => void,
   onClickFastMode: () => void,
+  onClickSolve: () => void
 };
 
 /**
@@ -22,7 +22,9 @@ type StatusSectionProps = {
 export const StatusSection = (props: StatusSectionProps) => {
   return (
     <section className="status">
-      <SolveMethod onChange={props.onChange} />
+      <h2 className="solve" onClick={props.onClickSolve}>
+        Solve
+      </h2> 
       <Timer />
       <Numbers onClickNumber={(number) => props.onClickNumber(number)} />
       <div className="status__actions">

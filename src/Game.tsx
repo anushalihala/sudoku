@@ -162,7 +162,7 @@ export const Game: React.FC<{}> = () => {
   * Pass gameArray and solveValue to python Sudoku Solver using AJAX
   * Set returned value as gameArray
   */
-  function onChangeSolveMethod(e: React.ChangeEvent<HTMLSelectElement>) {
+  function onClickSolve() {
     let solverArray = []
     let solverArrayRow = []
     for(var counter = 0; counter < 81; counter++){
@@ -281,12 +281,12 @@ export const Game: React.FC<{}> = () => {
           />
           <StatusSection
             onClickNumber={(number: string) => onClickNumber(number)}
-            onChange={(e: React.ChangeEvent<HTMLSelectElement>) => onChangeSolveMethod(e)}
             onClickUndo={onClickUndo}
             onClickErase={onClickErase}
             onClickHint={onClickHint}
             onClickMistakesMode={onClickMistakesMode}
             onClickFastMode={onClickFastMode}
+            onClickSolve={onClickSolve}
           />
         </div>
         <Footer />

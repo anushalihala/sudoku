@@ -179,6 +179,21 @@ body {
   width: 30%;
 }
 
+.status .solve {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 2;
+  color: var(--color-grey);
+  cursor: pointer;
+  position: relative;
+  top: 39px;
+  left: 80px;
+}
+
+.status .solve:hover {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
 .status__difficulty {
   position: relative;
   top: 39px;
@@ -599,3 +614,4 @@ input:checked + .status__action-lock-mode-slider:before {
     font-size: 30px;
   }
 }
+
