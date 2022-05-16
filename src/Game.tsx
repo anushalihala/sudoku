@@ -6,6 +6,7 @@ import { StatusSection } from './components/layout/StatusSection';
 import { Footer } from './components/layout/Footer';
 import { getBlankSudoku } from './solver/BlankSudoku';
 import { useSudokuContext } from './context/SudokuContext';
+import { sudokuSolver } from './solver/sudokuSolver';
 
 /**
  * Game is the main React component.
@@ -152,9 +153,35 @@ export const Game: React.FC<{}> = () => {
    * 1. Update 'Difficulty' level
    * 2. Create New Game
    */
-  function onChangeDifficulty(e: React.ChangeEvent<HTMLSelectElement>) {
-    setDifficulty(e.target.value);
-    _createNewGame(e);
+  // function onChangeDifficulty(e: React.ChangeEvent<HTMLSelectElement>) {
+  //   setDifficulty(e.target.value);
+  //   _createNewGame(e);
+  // }
+
+  /*
+  * Pass gameArray and solveValue to python Sudoku Solver using AJAX
+  * Set returned value as gameArray
+  */
+  function onChangeSolveMethod(e: React.ChangeEvent<HTMLSelectElement>) {
+    let solverArray = []
+    let solverArrayRow = []
+    for(var counter = 0; counter < 81; counter++){
+      if( counter % 9 === 0 && counter !== 0){
+        solverArray.push(solverArrayRow)
+        solverArrayRow = []
+      }          
+      let cellNumber = parseInt(gameArray[counter])
+      let cellValue = cellNumber === 0 ? null : cellNumber
+      solverArrayRow.push(cellValue)
+    }
+    solverArray.push(solverArrayRow)
+    // console.log(solverArray)
+    let sudokuResult = sudokuSolver(solverArray)
+    // console.log(sudokuResult)
+    sudokuResult = sudokuResult.flat()
+    sudokuResult = sudokuResult.map( (item: any) => String(item))
+    // console.log(sudokuResult)
+    setGameArray(sudokuResult)
   }
 
   /**
@@ -254,7 +281,7 @@ export const Game: React.FC<{}> = () => {
           />
           <StatusSection
             onClickNumber={(number: string) => onClickNumber(number)}
-            onChange={(e: React.ChangeEvent<HTMLSelectElement>) => onChangeDifficulty(e)}
+            onChange={(e: React.ChangeEvent<HTMLSelectElement>) => onChangeSolveMethod(e)}
             onClickUndo={onClickUndo}
             onClickErase={onClickErase}
             onClickHint={onClickHint}
