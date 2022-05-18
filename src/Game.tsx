@@ -57,6 +57,9 @@ export const Game: React.FC<{}> = () => {
     setCellSelected(-1);
     setHistory([]);
     setWon(false);
+
+    setSolvedArray(temporaryInitArray)
+    setObtainedSolution(false)
   }
 
   /**
@@ -184,7 +187,26 @@ export const Game: React.FC<{}> = () => {
     return sudokuResult
   }
 
+  /*
+  * Check whether solvedArray is completely filled
+  */
+/*   function _checkSolvedArrayFilled() {
+    return solvedArray.every(item => item!=="0")
+  } */
+
+  /*
+  * On Click of Solve button in Status section
+  * On first click fill
+  */
   function onClickSolve() {
+    if(obtainedSolution){
+      setGameArray(solvedArray)
+    }
+    else{
+      let solution = solve()
+      setSolvedArray(solution)
+      setObtainedSolution(true)
+    }
   }
 
   /**
