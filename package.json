@@ -4,6 +4,7 @@
   "private": true,
   "author": "Amith Raravi <amith.raravi@gmail.com>",
   "license": "MIT",
+  "homepage": ".",
   "dependencies": {
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
