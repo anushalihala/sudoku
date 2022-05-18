@@ -1,10 +1,9 @@
 import React from 'react';
-import { Difficulty } from '../Difficulty';
 import { Timer } from '../Timer';
 import { Numbers } from '../Numbers';
 import { Action } from '../Action';
 import { Mode } from '../Mode';
-import { SolveMethod } from '../SolveMethod';
+import { useSudokuContext } from '../../context/SudokuContext';
 
 type StatusSectionProps = {
   onClickNumber: (number: string) => void,
@@ -20,11 +19,14 @@ type StatusSectionProps = {
  * React component for the Status Section.
  */
 export const StatusSection = (props: StatusSectionProps) => {
+  let sudokuContext = useSudokuContext()
+  let obtainedSolution = sudokuContext.obtainedSolution
+
   return (
     <section className="status">
-      <h2 className="solve" onClick={props.onClickSolve}>
-        Solve
-      </h2> 
+      <button className="solve" onClick={props.onClickSolve}>
+        {obtainedSolution ? "Fill" : "Solve"}
+      </button> 
       <Timer />
       <Numbers onClickNumber={(number) => props.onClickNumber(number)} />
       <div className="status__actions">
