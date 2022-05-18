@@ -159,10 +159,10 @@ export const Game: React.FC<{}> = () => {
   // }
 
   /*
-  * Pass gameArray and solveValue to python Sudoku Solver using AJAX
-  * Set returned value as gameArray
+  * Convert gameArray to different format and pass to sudokuSolver library
+  * Convert returned value format and set as gameArray
   */
-  function onClickSolve() {
+  function solve() {
     let solverArray = []
     let solverArrayRow = []
     for(var counter = 0; counter < 81; counter++){
@@ -181,7 +181,10 @@ export const Game: React.FC<{}> = () => {
     sudokuResult = sudokuResult.flat()
     sudokuResult = sudokuResult.map( (item: any) => String(item))
     // console.log(sudokuResult)
-    setGameArray(sudokuResult)
+    return sudokuResult
+  }
+
+  function onClickSolve() {
   }
 
   /**
