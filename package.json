@@ -1,8 +1,7 @@
 {
   "name": "sudoku",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": true,
-  "author": "Amith Raravi <amith.raravi@gmail.com>",
   "license": "MIT",
   "homepage": ".",
   "dependencies": {
