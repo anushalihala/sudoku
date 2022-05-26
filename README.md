@@ -42,11 +42,11 @@ To this effect, 2 new features have been designed and implemented; Lock and Solv
 Switching ON Lock mode allows users to enter the predetermined Sudoku numbers. \
 These appear in black coloured font.
 
-![Sudoku Lock Mode](./images/sudoku_lock_mode.jpg)
+![Sudoku Lock Mode](./images/sudoku_lock_mode.JPG)
 
 Once the predetermined numbers have been filled, Lock mode can be switched OFF. Any numbers entered in this mode appear in a grey colour as shown by the highlighted '4' in the image below.
 
-![Sudoku Unlock Mode](./images/sudoku_unlock_mode.jpg)
+![Sudoku Unlock Mode](./images/sudoku_unlock_mode.JPG)
 
 ### Solve
 
@@ -54,8 +54,8 @@ The Solve button can be clicked to compute a solution for the Sudoku. \
 Once the Solve button is clicked, the 'Hint' button and 'Mistakes Mode' are enabled. \
 The Solve button also changes to a 'Fill' button.
 
-![Sudoku Solve Button](./images/sudoku_solve.jpg)
+![Sudoku Solve Button](./images/sudoku_solve.JPG)
 
 On clicking Fill, the found solution is used to populate the cells of the Sudoku.
 
-![Sudoku Fill Button](./images/sudoku_fill.jpg)
+![Sudoku Fill Button](./images/sudoku_fill.JPG)
