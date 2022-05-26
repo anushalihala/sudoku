@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSudokuContext } from "../context/SudokuContext"
 
 type ActionProps = {
   action: string,
@@ -44,8 +45,11 @@ const Svg = (props: SvgProps) => {
  * React component for the Action buttons in the Status Section.
  */
 export const Action = (props: ActionProps) => {
+  const sudokuContext = useSudokuContext();
+  let isDisabled = props.action == "hint" && !sudokuContext.obtainedSolution
+  // console.log("Is disabled?", isDisabled) //logs for testing
   return (
-    <div className={  props.action === 'undo'
+    <div style={isDisabled ? {pointerEvents: "none", opacity: "0.4"} : {}} className={  props.action === 'undo'
                       ? "status__action-undo"
                       : props.action === 'erase'
                       ? "status__action-erase"

@@ -1,25 +1,25 @@
-import React, { useState, useEffect } from 'react';
+// import React, { useState, useEffect } from 'react';
 import { useSudokuContext } from '../context/SudokuContext';
-import moment from 'moment';
+// import moment from 'moment';
 
 /**
  * React component for the Timer in Status Section.
  * Uses the 'useEffect' hook to update the timer every minute.
  */
 export const Timer = () => {
-  let [currentTime, setCurrentTime] = useState(moment());
-  let { timeGameStarted, won } = useSudokuContext();
+  // let [currentTime, setCurrentTime] = useState(moment());
+  // let { timeGameStarted, won } = useSudokuContext();
 
-  useEffect(() => {
-    if (!won)
-      setTimeout(() => tick(), 1000);
-  });
+  // useEffect(() => {
+  //   if (!won)
+  //     setTimeout(() => tick(), 1000);
+  // });
 
-  function tick() {
-    setCurrentTime(moment());
-  }
+  // function tick() {
+  //   setCurrentTime(moment());
+  // }
 
-  function getTimer() {
+  /* function getTimer() {
     let secondsTotal = currentTime.diff(timeGameStarted, 'seconds');
     if (secondsTotal <= 0)
       return '00:00';
@@ -34,10 +34,14 @@ export const Timer = () => {
     stringTimer += seconds < 10 ? '0' + seconds : seconds;
 
     return stringTimer;
-  }
+  } */
+
+  const sudokuContext = useSudokuContext();
+  let isDisabled = !sudokuContext.obtainedSolution
+  const stringTimer = "--:--"
 
   return (
-    <div className="status__time">{getTimer()}
+    <div style={isDisabled ? {pointerEvents: "none", opacity: "0.4"} : {}}  className="status__time">{stringTimer}
     </div>
   )
 }
